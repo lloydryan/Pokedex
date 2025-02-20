@@ -92,24 +92,42 @@
             <div class="information">
                 <div class="screen">
                 <h2>Stats & Battle Info</h2>
-                <p><strong>HP:</strong>
+                <p class="flex items-center">
+                    <i class="fas fa-heart text-red-500 mr-2"></i>
+                    <strong>HP:</strong>
                     <%= pokemon.stats[0].base_stat %>
                 </p>
-                <p><strong>Attack:</strong>
+                
+                <p class="flex items-center">
+                    <i class="fas fa-fist-raised text-yellow-500 mr-2"></i>
+                    <strong>Attack:</strong>
                     <%= pokemon.stats[1].base_stat %>
                 </p>
-                <p><strong>Defense:</strong>
+                
+                <p class="flex items-center">
+                    <i class="fas fa-shield-alt text-blue-500 mr-2"></i>
+                    <strong>Defense:</strong>
                     <%= pokemon.stats[2].base_stat %>
                 </p>
-                <p><strong>Special Attack:</strong>
+                
+                <p class="flex items-center">
+                    <i class="fas fa-bolt text-orange-500 mr-2"></i>
+                    <strong>Special Attack:</strong>
                     <%= pokemon.stats[3].base_stat %>
                 </p>
-                <p><strong>Special Defense:</strong>
+                
+                <p class="flex items-center">
+                    <i class="fas fa-shield-virus text-teal-500 mr-2"></i>
+                    <strong>Special Defense:</strong>
                     <%= pokemon.stats[4].base_stat %>
                 </p>
-                <p><strong>Speed:</strong>
+                
+                <p class="flex items-center">
+                    <i class="fas fa-tachometer-alt text-purple-500 mr-2"></i>
+                    <strong>Speed:</strong>
                     <%= pokemon.stats[5].base_stat %>
                 </p>
+
                 <p class="abilities">
                     <br>
                     <strong>ABILITIES</strong><br>
