@@ -8,7 +8,7 @@
 </head>
 
 <body class="bg-gray-900 text-white flex flex-col min-h-screen items-center justify-center">
-    <div class="pokedex-container mt-4">
+    <div class="pokedex-container mt-4 mb-8">
         <!-- Left Panel: Pokédex -->
         <div class="pokedex-left">
             <div class="led blue"></div>
@@ -25,12 +25,63 @@
                 </div>
 
                 <div class="mt-4 text-gray-800">
-                    <p class="text-lg font-semibold">Type: <%= pokemon.types.map(t=> t.type.name).join(', ') %></p>
-                    <p class="text-lg font-semibold">Height: <%= pokemon.height %>
-                    </p>
-                    <p class="text-lg font-semibold">Weight: <%= pokemon.weight %>
-                    </p>
-                    
+                <div class="types-container flex justify-center">
+                    <% pokemon.types.forEach(t=> { %>
+                        <span class="type-badge <%= t.type.name %>">
+                            <%= t.type.name.toUpperCase() %>
+                        </span>
+                        <% }) %>
+                </div>
+
+
+
+
+                <!-- Stats Section -->
+
+                <div class="stats-box border-2 border-red-500 p-3 bg-gray-100 mt-4">
+                    <p class="stat-label">HEIGHT <span class="stat-value">
+                            <%= (pokemon.height / 10).toFixed(1) %> m
+                        </span></p>
+                    <p class="stat-label">WEIGHT <span class="stat-value">
+                            <%= (pokemon.weight / 10).toFixed(1) %> kg
+                        </span></p>
+                </div>
+
+
+                
+
+                                <!-- Moves Section -->
+                                <% if (pokemon.moves && pokemon.moves.length> 0) { %>
+                                    <h2 class="mt-2">Moves</h2>
+                                    <div class="moves-container flex flex-wrap justify-center mt-2 gap-2">
+                                        
+                                        <% let displayedMoves=pokemon.moves.slice(0, 2); %>
+                                            <%- displayedMoves.map(move=> {
+                                                const moveType = move.move.type?.name || 'dark'; // Default to normal if missing
+                                                return `<span class="move-badge ${moveType}">${move.move.name.toUpperCase()}</span>`;
+                                                }).join('') %>
+                                
+                                                <% if (pokemon.moves.length> 2) { %>
+                                                    <button class="more-moves-btn move-badge bg-green-500 hover:bg-green-700 text-white " onclick="showMovesModal()">...</button>
+                                                    <% } %>
+                                    </div>
+                                
+                                    <!-- Hidden Modal for Full Moves List -->
+                                    <div id="movesModal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                                        <div class="modal-content bg-white p-6 rounded-lg shadow-lg w-80 text-center">
+                                            <h2 class="text-xl font-bold mb-4">All Moves</h2>
+                                            <div class="flex flex-wrap justify-center gap-2">
+                                                <%- pokemon.moves.map(move=> {
+                                                    const moveType = move.move.type?.name || 'normal';
+                                                    return `<span class="move-badge ${moveType}">${move.move.name.toUpperCase()}</span>`;
+                                                    }).join('') %>
+                                            </div>
+                                            <button onclick="closeMovesModal()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Close</button>
+                                        </div>
+                                    </div>
+                                    <% } else { %>
+                                        <p class="text-center text-gray-500 mt-4">No Moves Available</p>
+                                        <% } %> 
                 </div>
             </div>
         </div>
@@ -59,9 +110,23 @@
                 <p><strong>Speed:</strong>
                     <%= pokemon.stats[5].base_stat %>
                 </p>
-                <p class="abilities"><strong>Abilities:</strong>
-                    <%= pokemon.abilities.map(a=> a.ability.name).join(', ') %>
+                <p class="abilities">
+                    <br>
+                    <strong>ABILITIES</strong><br>
+                    <% pokemon.abilities.forEach(a=> { %>
+                        <span class="ability-name">
+                            <%= a.ability.name.toUpperCase() %>
+                        </span>
+                        <% if (a.is_hidden) { %> <span class="hidden-tag">(HIDDEN)</span>
+                            <% } %>
+                                <% if (!a.is_hidden && a.slot===1) { %> <span class="normal-tag">(NORMAL)</span>
+                                    <% } %>
+                                        <% if (!a.is_hidden && a.slot===2) { %> <span class="special-tag">(SPECIAL)</span>
+                                            <% } %>
+                                                <br>
+                                                <% }) %>
                 </p>
+
                 </div>
             </div>
             <div class="controls flex justify-center">

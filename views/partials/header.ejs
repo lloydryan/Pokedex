@@ -3,3 +3,15 @@
 <title>Pocket Monster</title>
 <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 <link rel="stylesheet" href="/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<script>
+    function showMovesModal() {
+        document.getElementById("movesModal").classList.add("show");
+        document.querySelector(".pokedex-right").classList.add("hidden"); // Hide right section
+    }
+
+    function closeMovesModal() {
+        document.getElementById("movesModal").classList.remove("show");
+        document.querySelector(".pokedex-right").classList.remove("hidden"); // Show right section
+    }
+</script>
