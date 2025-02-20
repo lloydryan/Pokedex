@@ -7,6 +7,11 @@ dotenv.config();
 
 const app = express();
 
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static("public"));
+
+
 app.set("view engine", "ejs");
 
 //app.use(express.static(path.join(__dirname, "public")));

@@ -3,28 +3,101 @@
 
 <head>
     <%- include("../partials/header") %>
+
+
 </head>
 
-<body class="bg-gray-100 text-gray-800">
-    <div class="container mx-auto p-5">
-        <h1 class="text-3xl font-bold text-center mb-5 capitalize">
-            <%= pokemon.name %>
-        </h1>
-        <div class="flex flex-col items-center">
-            <img src="<%= pokemon.sprites.front_default %>" alt="<%= pokemon.name %>" class="w-40 h-40" />
-            <p class="text-lg font-semibold">Height: <%= pokemon.height %>
-            </p>
-            <p class="text-lg font-semibold">Weight: <%= pokemon.weight %>
-            </p>
-            <p class="text-lg font-semibold">
-                Type: <%= pokemon.types.map(t=> t.type.name).join(', ') %>
-            </p>
+<body class="bg-gray-900 text-white flex flex-col min-h-screen items-center justify-center">
+    <div class="pokedex-container mt-4">
+        <!-- Left Panel: Pokédex -->
+        <div class="pokedex-left">
+            <div class="led blue"></div>
+            <div class="led red"></div>
+            <div class="led yellow"></div>
+            <div class="led green"></div>
+            <div class="screen">
+                <h1 class="text-2xl font-bold capitalize text-gray-900">
+                    <%= pokemon.name %>
+                </h1>
+                <div class="bg-white p-3 rounded-lg shadow-md border border-gray-300 mt-2">
+                    <img id="pokemon-sprite" src="<%= pokemon.sprites.front_default %>" alt="<%= pokemon.name %>"
+                        class="w-40 h-40">
+                </div>
+
+                <div class="mt-4 text-gray-800">
+                    <p class="text-lg font-semibold">Type: <%= pokemon.types.map(t=> t.type.name).join(', ') %></p>
+                    <p class="text-lg font-semibold">Height: <%= pokemon.height %>
+                    </p>
+                    <p class="text-lg font-semibold">Weight: <%= pokemon.weight %>
+                    </p>
+                    
+                </div>
+            </div>
         </div>
-        <div class="text-center mt-5">
-            <a href="/" class="px-4 py-2 bg-blue-500 text-white rounded-lg">Back</a>
+
+        <!-- Right Panel: Buttons & Console -->
+        <div class="pokedex-right">
+            
+            <div class="information">
+                <div class="screen">
+                <h2>Stats & Battle Info</h2>
+                <p><strong>HP:</strong>
+                    <%= pokemon.stats[0].base_stat %>
+                </p>
+                <p><strong>Attack:</strong>
+                    <%= pokemon.stats[1].base_stat %>
+                </p>
+                <p><strong>Defense:</strong>
+                    <%= pokemon.stats[2].base_stat %>
+                </p>
+                <p><strong>Special Attack:</strong>
+                    <%= pokemon.stats[3].base_stat %>
+                </p>
+                <p><strong>Special Defense:</strong>
+                    <%= pokemon.stats[4].base_stat %>
+                </p>
+                <p><strong>Speed:</strong>
+                    <%= pokemon.stats[5].base_stat %>
+                </p>
+                <p class="abilities"><strong>Abilities:</strong>
+                    <%= pokemon.abilities.map(a=> a.ability.name).join(', ') %>
+                </p>
+                </div>
+            </div>
+            <div class="controls flex justify-center">
+                <div class="dpad">
+                    <div class="up">▲</div>
+                    <div class="left">◄</div>
+                    <div class="right">►</div>
+                    <div class="down">▼</div>
+                </div>
+                <div class="buttons">
+                    <div class="button">▲</div>
+                    <div class="button">◯</div>
+                    <div class="button">■</div>
+                    <div class="button">X</div>
+                    
+                </div>
+            </div>
+                            <!-- Back Button -->
+                            <div class="text-center mt-5">
+                                <a href="/" class="px-5 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition">
+                                    Back
+                                </a>
+                            </div>
+                                            
+
         </div>
     </div>
+
     <%- include("../partials/footer") %>
 </body>
 
 </html>
+
+
+
+
+
+
+
